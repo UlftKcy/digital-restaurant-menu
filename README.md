@@ -23,10 +23,12 @@
 # Clone this repository
 ```bash
 $ git clone https://github.com/UlftKcy/digital-restaurant-menu.git
+```
 
 # Install dependencies
 ```bash
   $ npm install
+```
   
 # Add .env
 ```bash
@@ -42,11 +44,14 @@ $ git clone https://github.com/UlftKcy/digital-restaurant-menu.git
  MYSQL_PASSWORD = YOUR_MYSQL_PASSWORD
  MYSQL_DB = YOUR_MYSQL_DB
  DATABASE_URL = YOUR_DATABASE_URL
+```
   
 # Prisma Migrate
 ```bash
   $ npx prisma migrate dev --name init
+```
 
 # Run the app
 ```bash
   $ npm run dev or next dev
+```
