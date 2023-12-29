@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      String
+  photo     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String
+  meals Meal[]
+}
+
+model Meal {
+  id          Int         @id @default(autoincrement())
+  name        String
+  price       Float
+  description String
+  isActive    Boolean     @default(true)
+  categoryId  Int
+  category    Category    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  MealImage   MealImage[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model MealImage {
+  id                Int      @id @default(autoincrement())
+  bytes             Int
+  format            String
+  original_filename String
+  public_id         String
+  resource_type     String
+  secure_url        String
+  signature         String
+  mealId            Int
+  meal              Meal     @relation(fields: [mealId], references: [id], onDelete: Cascade)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}

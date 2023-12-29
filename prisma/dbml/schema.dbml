@@ -1,0 +1,52 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table User {
+  id Int [pk, increment]
+  name String [not null]
+  email String [unique, not null]
+  password String [not null]
+  role String [not null]
+  photo String
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table Category {
+  id Int [pk, increment]
+  name String [not null]
+  meals Meal [not null]
+}
+
+Table Meal {
+  id Int [pk, increment]
+  name String [not null]
+  price Float [not null]
+  description String [not null]
+  isActive Boolean [not null, default: true]
+  categoryId Int [not null]
+  category Category [not null]
+  MealImage MealImage [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table MealImage {
+  id Int [pk, increment]
+  bytes Int [not null]
+  format String [not null]
+  original_filename String [not null]
+  public_id String [not null]
+  resource_type String [not null]
+  secure_url String [not null]
+  signature String [not null]
+  mealId Int [not null]
+  meal Meal [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Ref: Meal.categoryId > Category.id [delete: Cascade]
+
+Ref: MealImage.mealId > Meal.id [delete: Cascade]
